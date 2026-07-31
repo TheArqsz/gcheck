@@ -1,13 +1,13 @@
 [build-system]
 requires = ["setuptools>=70"]
-build-backend = "setuptools.backends.legacy:build"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "gcheck"
 version = "0.1.0"
 description = "Validate exposed Google and Firebase credentials and determine real access scope."
 readme = "README.md"
-license = { file = "LICENSE" }
+license = { file = "LICENSE.md" }
 requires-python = ">=3.12"
 dependencies = [
     "requests>=2.34.2,<3",
@@ -30,6 +30,9 @@ gcheck = "gcheck:main"
 
 [project.urls]
 Repository = "https://github.com/TheArqsz/gcheck"
+
+[tool.setuptools]
+py-modules = ["gcheck"]
 
 [tool.setuptools.packages.find]
 include = ["checks*"]
