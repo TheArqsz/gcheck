@@ -1,0 +1,123 @@
+name: Bug Report
+description: Report a problem with gcheck
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug.
+
+        **Before you submit:** redact any real, live API keys, tokens, secrets, or
+        service account credentials from the command, output, or logs below.
+        Replace sensitive parts with placeholders like `AIzaSy****************`.
+        Do not paste working credentials into a public issue.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission checklist
+      options:
+        - label: I have searched existing issues and this hasn't been reported already
+          required: true
+        - label: I have redacted any real credentials, keys, or tokens from the content below
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: The exact command(s) you ran (redact any real secrets in the command itself).
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior / error output
+      description: Full output or traceback, with real credentials redacted.
+      render: shell
+    validations:
+      required: true
+
+  - type: dropdown
+    id: check-module
+    attributes:
+      label: Which check is affected?
+      options:
+        - Auto-detect (detect)
+        - Android API Key (android_key)
+        - Generic API Key (api_key)
+        - FCM Legacy (fcm_legacy)
+        - Firebase (firebase)
+        - Maps JavaScript Runtime Key (maps_js_runtime)
+        - OAuth Token (oauth_token)
+        - Refresh Token (refresh_token)
+        - Service Account (service_account)
+        - Not check-specific / other
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: gcheck version
+      description: Output of `pip show gcheck` or `gcheck --version`
+    validations:
+      required: true
+
+  - type: input
+    id: python-version
+    attributes:
+      label: Python version
+      description: Output of `python3 --version`
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: install-method
+    attributes:
+      label: Installation method
+      options:
+        - pip
+        - pipx
+        - From source (git clone)
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Anything else relevant (optional).
+    validations:
+      required: false

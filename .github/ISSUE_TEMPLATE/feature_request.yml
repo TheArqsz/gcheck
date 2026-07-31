@@ -1,0 +1,55 @@
+name: Feature Request
+description: Suggest a new feature or improvement for gcheck
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Is this related to a problem?
+      description: e.g. "I'm always frustrated when..." (optional, skip if not applicable)
+    validations:
+      required: false
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Describe the solution you'd like
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any alternative solutions or workarounds you've considered (optional).
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which area does this relate to?
+      options:
+        - New credential/check type
+        - Auto-detect (detect)
+        - Android API Key (android_key)
+        - Generic API Key (api_key)
+        - FCM Legacy (fcm_legacy)
+        - Firebase (firebase)
+        - Maps JavaScript Runtime Key (maps_js_runtime)
+        - OAuth Token (oauth_token)
+        - Refresh Token (refresh_token)
+        - Service Account (service_account)
+        - CLI / output / UX
+        - Not check-specific / other
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Anything else relevant, e.g. links to API docs for a new credential type (optional).
+    validations:
+      required: false
