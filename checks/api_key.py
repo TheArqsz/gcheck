@@ -133,6 +133,14 @@ def _maps_static(k):
     }
 
 
+def _maps_streetview(k):
+    return {
+        "url": "https://maps.googleapis.com/maps/api/streetview",
+        "method": "GET",
+        "params": {"location": "40.720032,-73.988354", "size": "100x100", "key": k},
+    }
+
+
 def _maps_js_check(k):
     return {
         "url": "https://maps.googleapis.com/maps/api/js",
@@ -316,6 +324,7 @@ def _base_services() -> list[dict]:
         {"name": "Maps: Elevation", "build": _maps_elevation},
         {"name": "Maps: Timezone", "build": _maps_timezone},
         {"name": "Maps: Static Maps", "build": _maps_static, "bytes": True},
+        {"name": "Maps: Street View", "build": _maps_streetview, "bytes": True},
         {"name": "Maps: JavaScript API", "build": _maps_js_check},
         {"name": "Android Key Validation", "probe": android_key.probe_android_headers},
         {"name": "iOS Key Validation", "build": _ios_restriction_probe},
