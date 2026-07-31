@@ -171,6 +171,14 @@ def _maps_js_check(k):
     }
 
 
+def _maps_embed(k):
+    return {
+        "url": "https://www.google.com/maps/embed/v1/place",
+        "method": "GET",
+        "params": {"q": "place_id:ChIJN1t_tDeuEmsRUsoyG83frY4", "key": k},
+    }
+
+
 def _ios_restriction_probe(k):
     return {
         "url": "https://maps.googleapis.com/maps/api/geocode/json",
@@ -362,6 +370,7 @@ def _base_services() -> list[dict]:
         {"name": "Maps: Static Maps", "build": _maps_static, "bytes": True},
         {"name": "Maps: Street View", "build": _maps_streetview, "bytes": True},
         {"name": "Maps: JavaScript API", "build": _maps_js_check},
+        {"name": "Maps: Embed API", "build": _maps_embed},
         {"name": "Android Key Validation", "probe": android_key.probe_android_headers},
         {"name": "iOS Key Validation", "build": _ios_restriction_probe},
         {"name": "Referrer Key Validation", "build": _referrer_restriction_probe},
