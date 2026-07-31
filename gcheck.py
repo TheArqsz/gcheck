@@ -135,7 +135,7 @@ def build_parser() -> argparse.ArgumentParser:
         action="append",
         default=[],
         metavar="SUBSTR",
-        help="Substring filter on API-key service names only (repeatable; case-insensitive)",
+        help="Substring filter on API-key service names only (repeatable or comma-separated; case-insensitive)",
     )
     scope.add_argument(
         "--active",
@@ -1450,6 +1450,7 @@ def _print_finding_report(results: list[Result], no_color: bool) -> None:
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     args.project_ids = _normalize_repeatable_csv(args.project_ids)
+    args.only = _normalize_repeatable_csv(args.only)
 
     if args.list_services:
         for svc in ak_mod.list_api_key_services():
