@@ -171,20 +171,6 @@ spanner.databases.list                        appengine.applications.get
 dns.managedZones.list                         run.services.list
 ```
 
-### Audit log footprint
-
-| Operation | Leaves trace |
-|:---|:---|
-| API key probes | No |
-| tokeninfo / userinfo | No |
-| Resource Manager project list | Yes (Data Read) |
-| `testIamPermissions` | No (exempt from Data Access logs) |
-| Service account JWT exchange | Yes (`GenerateAccessToken`) |
-| Refresh token exchange | Yes (token endpoint) |
-| Firebase RTDB / Storage read | Yes (Firebase request log) |
-| Remote Config fetch | Yes (fetch event) |
-| Firebase Auth sign-up (`--active`) | Yes (Auth dashboard + Audit Logs) |
-
 ## Example output
 
 ```
