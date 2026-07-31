@@ -182,6 +182,17 @@ def probe_maps_js_runtime(
             context.close()
             browser.close()
     except Exception as exc:
+        if "Executable doesn't exist" in str(exc):
+            return Result(
+                service="Maps: JavaScript API (runtime)",
+                status=Status.UNKNOWN,
+                detail=(
+                    "Playwright runtime probe requested but the Chromium browser "
+                    "is not installed. Install with: playwright install chromium"
+                ),
+                endpoint=endpoint,
+                http_code=bootstrap_http_code,
+            )
         return Result(
             service="Maps: JavaScript API (runtime)",
             status=Status.ERROR,
