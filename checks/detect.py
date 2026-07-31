@@ -23,6 +23,8 @@ RE_JWT = re.compile(
     r"\b(eyJ[A-Za-z0-9_\-]+)\.(eyJ[A-Za-z0-9_\-]+)\.([A-Za-z0-9_\-]+)\b"
 )
 
+RE_RECAPTCHA_SECRET = re.compile(r"\b6[0-9A-Za-z_\-]{39}\b")
+
 
 @dataclass
 class Detected:
@@ -83,6 +85,9 @@ def detect_from_string(s: str) -> list[Detected]:
 
     for m in RE_JWT.finditer(s):
         found.append(Detected("jwt", m.group(0), source="regex"))
+
+    for m in RE_RECAPTCHA_SECRET.finditer(s):
+        found.append(Detected("recaptcha_secret", m.group(0), source="regex"))
 
     return found
 

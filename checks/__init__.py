@@ -8,6 +8,7 @@ from . import refresh_token
 from . import service_account
 from . import firebase
 from . import fcm_legacy
+from . import recaptcha
 
 __all__ = [
     "_common",
@@ -18,4 +19,5 @@ __all__ = [
     "service_account",
     "firebase",
     "fcm_legacy",
+    "recaptcha",
 ]
