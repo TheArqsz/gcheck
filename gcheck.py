@@ -40,6 +40,7 @@ from checks import (
     service_account as sa_mod,
     firebase as fb_mod,
     fcm_legacy as fcm_mod,
+    recaptcha as recaptcha_mod,
     detect,
 )
 
@@ -81,6 +82,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--fcm-server-key", dest="fcm_key", help="Legacy FCM server key (AAAA...)"
     )
     inp.add_argument("--jwt", help="A bare JWT to decode locally")
+    inp.add_argument(
+        "--recaptcha-secret",
+        dest="recaptcha_secret",
+        help="Google reCAPTCHA secret key (6...)",
+    )
 
     ctx = p.add_argument_group("context (improves coverage)")
     ctx.add_argument(
@@ -1020,6 +1026,10 @@ def _dispatch(
         print_header(f"FCM legacy key {value[:10]}...", args.no_color)
         results.extend(fcm_mod.check_fcm_legacy(value))
 
+    elif kind == "recaptcha_secret":
+        print_header(f"reCAPTCHA secret {value[:10]}...", args.no_color)
+        results.extend(recaptcha_mod.check_recaptcha_secret(value))
+
     elif kind == "oauth_refresh":
         print_header(
             "OAuth refresh token (need --client-id/--client-secret)", args.no_color
@@ -1078,6 +1088,10 @@ def _collect_inputs(args: argparse.Namespace) -> list[detect.Detected]:
         items.append(detect.Detected("oauth_refresh", args.refresh_token, source="cli"))
     if args.fcm_key:
         items.append(detect.Detected("fcm_legacy", args.fcm_key, source="cli"))
+    if args.recaptcha_secret:
+        items.append(
+            detect.Detected("recaptcha_secret", args.recaptcha_secret, source="cli")
+        )
     if args.jwt:
         items.append(detect.Detected("jwt", args.jwt, source="cli"))
     if args.sa_file:

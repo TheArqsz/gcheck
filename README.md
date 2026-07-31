@@ -66,6 +66,7 @@ gcheck --refresh-token "1//..." --client-id "..." --client-secret "..."
 gcheck --service-account-file sa.json
 gcheck --fcm-server-key "AAAA..."
 gcheck --jwt "eyJ..."
+gcheck --recaptcha-secret "6..."
 
 # Probe only services matching a substring
 gcheck --api-key AIzaSy... --only maps
@@ -145,6 +146,7 @@ headless browser probe that classifies runtime behavior more directly.
 | Firebase config / `google-services.json` | Realtime Database read, Storage bucket list, Remote Config fetch, Firebase Auth lookup, plus API key probes for each embedded key |
 | Legacy FCM server key | FCM `/fcm/send` with `dry_run: true` |
 | JWT | Local decode, tokeninfo lookup |
+| reCAPTCHA secret key | `siteverify` with a dummy response token |
 
 ### Default IAM permissions tested
 
