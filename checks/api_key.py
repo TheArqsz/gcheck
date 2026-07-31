@@ -282,7 +282,11 @@ def _base_services() -> list[dict]:
         {"name": "Translate v2", "build": _translate_v2},
         {"name": "Safe Browsing v4", "build": _safebrowsing_lists},
         {"name": "Web Risk v1", "build": _webrisk_search},
-        {"name": "Gemini / Generative Lang", "build": _gemini_list_models},
+        {
+            "name": "Gemini / Generative Lang",
+            "build": _gemini_list_models,
+            "ambiguous_invalid_note": _GEMINI_INVALID_AMBIGUITY_NOTE,
+        },
         {
             "name": "Firebase Auth: lookup",
             "build": _firebase_identitytoolkit_lookup,
@@ -307,6 +311,7 @@ def _build_services(
             {
                 "name": "Gemini: generateContent (active)",
                 "build": _gemini_generate_content,
+                "ambiguous_invalid_note": _GEMINI_INVALID_AMBIGUITY_NOTE,
             }
         )
     for project_id in project_ids or []:
@@ -368,6 +373,13 @@ _DENIED_HINTS = (
     "request_denied",
     "REQUEST_DENIED",
     "Forbidden",
+)
+_GEMINI_INVALID_AMBIGUITY_NOTE = (
+    "Generative Language API returns this same message for a dead key "
+    "and for a valid key whose project hasn't enabled the API; this "
+    "response alone can't tell you which. Check whether other DISABLED "
+    "results in this scan resolved a consumer project before assuming "
+    "the key is dead."
 )
 
 
@@ -503,6 +515,7 @@ def _classify(
     parsed: dict,
     *,
     allow_400_valid: bool = False,
+    ambiguous_invalid_note: Optional[str] = None,
 ) -> tuple[Status, str]:
     if http_code is None:
         return Status.ERROR, body[:200]
@@ -512,6 +525,8 @@ def _classify(
 
     invalid_hint = _contains_any_hint(body_l, _INVALID_KEY_HINTS)
     if invalid_hint:
+        if ambiguous_invalid_note:
+            return Status.UNKNOWN, f"{invalid_hint}: {ambiguous_invalid_note}"
         return Status.INVALID, invalid_hint
 
     restricted_hint = _contains_any_hint(body_l, _RESTRICTED_HINTS)
@@ -608,6 +623,7 @@ def _run_service(api_key: str, service: dict) -> Result:
             body,
             parsed,
             allow_400_valid=bool(service.get("allow_400_valid")),
+            ambiguous_invalid_note=service.get("ambiguous_invalid_note"),
         )
 
     recommendation_metadata = build_recommendation_metadata(detail=detail)
