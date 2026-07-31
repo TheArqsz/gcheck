@@ -138,7 +138,7 @@ headless browser probe that classifies runtime behavior more directly.
 
 | Credential | Probes |
 |:---|:---|
-| Google API key | Maps (Geocoding, Roads nearestRoads, Places legacy Text/Nearby, Directions, Distance Matrix, Elevation, Timezone, Static, JS), Places API (New) text search, Routes API computeRoutes, Android/iOS/Referrer restriction detection, YouTube Data, Translate v2, Safe Browsing v4, Web Risk v1, Gemini, Firebase Auth, FCM legacy, Firestore REST (when project IDs are provided) |
+| Google API key | Maps (Geocoding, Roads nearestRoads, Places legacy Text/Nearby, Directions, Distance Matrix, Elevation, Timezone, Static, Street View, JS), Places API (New) text search, Routes API computeRoutes, Android/iOS/Referrer restriction detection, YouTube Data, Translate v2, Safe Browsing v4, Web Risk v1, Gemini, Firebase Auth, FCM legacy, Firestore REST (when project IDs are provided) |
 | OAuth2 access token | tokeninfo, OIDC userinfo, Resource Manager project list, IAM `testIamPermissions`, GCS buckets, Compute zones, IAM service accounts |
 | OAuth2 refresh token | Token exchange → same as access token |
 | Authorized user JSON (`type=authorized_user`) | Refresh-token exchange using embedded client credentials → same as access token |
