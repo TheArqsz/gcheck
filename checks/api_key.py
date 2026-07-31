@@ -311,6 +311,15 @@ def _maps_roads_nearest(k):
     }
 
 
+def _geolocate(k):
+    return {
+        "url": "https://www.googleapis.com/geolocation/v1/geolocate",
+        "method": "POST",
+        "params": {"key": k},
+        "json": {},
+    }
+
+
 def _base_services() -> list[dict]:
     return [
         {"name": "Maps: Geocoding", "build": _maps_geocode},
@@ -319,6 +328,7 @@ def _base_services() -> list[dict]:
         {"name": "Maps: Places (Nearby)", "build": _maps_places_nearbysearch},
         {"name": "Places API (New): Search Text", "build": _places_new_text_search},
         {"name": "Routes API: computeRoutes", "build": _routes_compute_routes},
+        {"name": "Geolocation API", "build": _geolocate},
         {"name": "Maps: Directions", "build": _maps_directions},
         {"name": "Maps: Distance Matrix", "build": _maps_distance_matrix},
         {"name": "Maps: Elevation", "build": _maps_elevation},
