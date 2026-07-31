@@ -263,9 +263,18 @@ def _firestore_documents(k, project_id: str):
     }
 
 
+def _maps_roads_nearest(k):
+    return {
+        "url": "https://roads.googleapis.com/v1/nearestRoads",
+        "method": "GET",
+        "params": {"points": "60.170880,24.942795|60.170879,24.942796", "key": k},
+    }
+
+
 def _base_services() -> list[dict]:
     return [
         {"name": "Maps: Geocoding", "build": _maps_geocode},
+        {"name": "Maps: Roads (nearestRoads)", "build": _maps_roads_nearest},
         {"name": "Maps: Places (Text)", "build": _maps_places_textsearch},
         {"name": "Maps: Places (Nearby)", "build": _maps_places_nearbysearch},
         {"name": "Places API (New): Search Text", "build": _places_new_text_search},
