@@ -93,6 +93,38 @@ def _maps_directions(k):
     }
 
 
+def _maps_distance_matrix(k):
+    return {
+        "url": "https://maps.googleapis.com/maps/api/distancematrix/json",
+        "method": "GET",
+        "params": {
+            "origins": "40.6655101,-73.89188969999998",
+            "destinations": "40.6905615,-73.9976592",
+            "key": k,
+        },
+    }
+
+
+def _maps_elevation(k):
+    return {
+        "url": "https://maps.googleapis.com/maps/api/elevation/json",
+        "method": "GET",
+        "params": {"locations": "39.7391536,-104.9847034", "key": k},
+    }
+
+
+def _maps_timezone(k):
+    return {
+        "url": "https://maps.googleapis.com/maps/api/timezone/json",
+        "method": "GET",
+        "params": {
+            "location": "39.6034810,-119.6822510",
+            "timestamp": "1331161200",
+            "key": k,
+        },
+    }
+
+
 def _maps_static(k):
     return {
         "url": "https://maps.googleapis.com/maps/api/staticmap",
@@ -280,6 +312,9 @@ def _base_services() -> list[dict]:
         {"name": "Places API (New): Search Text", "build": _places_new_text_search},
         {"name": "Routes API: computeRoutes", "build": _routes_compute_routes},
         {"name": "Maps: Directions", "build": _maps_directions},
+        {"name": "Maps: Distance Matrix", "build": _maps_distance_matrix},
+        {"name": "Maps: Elevation", "build": _maps_elevation},
+        {"name": "Maps: Timezone", "build": _maps_timezone},
         {"name": "Maps: Static Maps", "build": _maps_static, "bytes": True},
         {"name": "Maps: JavaScript API", "build": _maps_js_check},
         {"name": "Android Key Validation", "probe": android_key.probe_android_headers},
