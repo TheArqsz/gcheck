@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gcheck"
-version = "0.1.1"
+version = "0.1.2"
 description = "Validate exposed Google and Firebase credentials and determine real access scope."
 readme = "README.md"
 license = { file = "LICENSE.md" }

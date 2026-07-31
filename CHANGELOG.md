@@ -2,6 +2,22 @@
 
 <!-- version list -->
 
+## v0.1.2 (2026-07-31)
+
+### Bug Fixes
+
+- **api-key**: Stop misclassifying disabled Gemini API as invalid key
+  ([`b782710`](https://github.com/TheArqsz/gcheck/commit/b782710429d2c16b6ffaeb1c18054b74d578e64c))
+
+- **maps-js-runtime**: Give clean error when chromium isn't installed
+  ([`3211bd5`](https://github.com/TheArqsz/gcheck/commit/3211bd506a5ec752d2b93c3d5c4caa8fad719523))
+
+### Documentation
+
+- **readme**: Remove audit log footprint table
+  ([`cee30f7`](https://github.com/TheArqsz/gcheck/commit/cee30f707c1952c680c5cf347b98909134ef91c3))
+
+
 ## v0.1.1 (2026-07-31)
 
 ### Bug Fixes
