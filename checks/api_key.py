@@ -51,6 +51,27 @@ def _maps_places_nearbysearch(k):
     }
 
 
+def _maps_places_findplacefromtext(k):
+    return {
+        "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json",
+        "method": "GET",
+        "params": {
+            "input": "Museum of Contemporary Art Australia",
+            "inputtype": "textquery",
+            "fields": "name",
+            "key": k,
+        },
+    }
+
+
+def _maps_places_autocomplete(k):
+    return {
+        "url": "https://maps.googleapis.com/maps/api/place/autocomplete/json",
+        "method": "GET",
+        "params": {"input": "Bingham", "types": "(cities)", "key": k},
+    }
+
+
 def _places_new_text_search(k):
     return {
         "url": "https://places.googleapis.com/v1/places:searchText",
@@ -326,6 +347,11 @@ def _base_services() -> list[dict]:
         {"name": "Maps: Roads (nearestRoads)", "build": _maps_roads_nearest},
         {"name": "Maps: Places (Text)", "build": _maps_places_textsearch},
         {"name": "Maps: Places (Nearby)", "build": _maps_places_nearbysearch},
+        {
+            "name": "Maps: Places (Find Place from Text)",
+            "build": _maps_places_findplacefromtext,
+        },
+        {"name": "Maps: Places (Autocomplete)", "build": _maps_places_autocomplete},
         {"name": "Places API (New): Search Text", "build": _places_new_text_search},
         {"name": "Routes API: computeRoutes", "build": _routes_compute_routes},
         {"name": "Geolocation API", "build": _geolocate},
