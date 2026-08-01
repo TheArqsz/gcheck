@@ -2,6 +2,37 @@
 
 <!-- version list -->
 
+## v0.2.0 (2026-08-01)
+
+### Bug Fixes
+
+- **cli**: Support comma-separated values for --only
+  ([`d1d7f5a`](https://github.com/TheArqsz/gcheck/commit/d1d7f5a8c18525370e1dc8abe0636275ac16518c))
+
+### Features
+
+- **api-key**: Add Geolocation API probe
+  ([`1331c84`](https://github.com/TheArqsz/gcheck/commit/1331c8403aca7f2ca417286b9a5d8cc8dec9b788))
+
+- **api-key**: Add Maps Distance Matrix, Elevation, Timezone probes
+  ([`72839f6`](https://github.com/TheArqsz/gcheck/commit/72839f60628db111816c9ed28a867244ef003f19))
+
+- **api-key**: Add Maps Embed API probe
+  ([`ec99b35`](https://github.com/TheArqsz/gcheck/commit/ec99b351721c4495998c7a2962c42fd47d74a2cb))
+
+- **api-key**: Add Maps Find Place from Text and Autocomplete probes
+  ([`ce5edc4`](https://github.com/TheArqsz/gcheck/commit/ce5edc430edf478491de81dd06ecb26ce61d5f22))
+
+- **api-key**: Add Maps Roads (nearestRoads) probe
+  ([`10d01e2`](https://github.com/TheArqsz/gcheck/commit/10d01e246bd2fbb78b3e7f96aeb10f56ef786326))
+
+- **api-key**: Add Maps Street View Static probe
+  ([`d71b1ed`](https://github.com/TheArqsz/gcheck/commit/d71b1ed9c6ff478c75c8c28fabf235fed644f19a))
+
+- **recaptcha**: Add reCAPTCHA secret key detection and validation
+  ([`265c8ac`](https://github.com/TheArqsz/gcheck/commit/265c8ac2fd49b84d721a55e56a1be2714d9bdd23))
+
+
 ## v0.1.2 (2026-07-31)
 
 ### Bug Fixes
