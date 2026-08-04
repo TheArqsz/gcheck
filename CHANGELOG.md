@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v0.2.1 (2026-08-04)
+
+### Bug Fixes
+
+- **api-key**: Detect Gemini unrestricted-key rejection (401 + API_KEY_SERVICE_BLOCKED)
+  ([`6bad9f3`](https://github.com/TheArqsz/gcheck/commit/6bad9f39f74f4dcd1faeca98f00f97a1c2d311c1))
+
+
 ## v0.2.0 (2026-08-01)
 
 ### Bug Fixes
