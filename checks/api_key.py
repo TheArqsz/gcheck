@@ -472,12 +472,15 @@ _DENIED_HINTS = (
     "REQUEST_DENIED",
     "Forbidden",
 )
+# https://ai.google.dev/gemini-api/docs/api-key#api-keys
 _GEMINI_INVALID_AMBIGUITY_NOTE = (
-    "Generative Language API returns this same message for a dead key "
-    "and for a valid key whose project hasn't enabled the API; this "
-    "response alone can't tell you which. Check whether other DISABLED "
+    "Generative Language API uses this same message for both a dead key "
+    "and a valid key whose project hasn't enabled the API. This response "
+    "alone can't distinguish those cases. Check whether other DISABLED "
     "results in this scan resolved a consumer project before assuming "
-    "the key is dead."
+    "the key is dead. "
+    "Note: as of Sep 2026 Google rejects all standard API keys for Gemini "
+    "(migrate to auth keys); a DENIED result may also indicate this."
 )
 
 
@@ -711,6 +714,24 @@ def _run_service(api_key: str, service: dict) -> Result:
             code=code,
             body=body,
             url=url,
+        )
+
+    # 401 + API_KEY_SERVICE_BLOCKED from Gemini = unrestricted key rejected by policy
+    # (enforced Jun 2026; all standard keys rejected Sep 2026). A restricted key
+    # blocked from Gemini returns 403, not 401.
+    # https://ai.google.dev/gemini-api/docs/api-key#api-keys
+    if name.startswith("Gemini") and code == 401 and "API_KEY_SERVICE_BLOCKED" in body:
+        return Result(
+            service=name,
+            status=Status.DENIED,
+            detail=(
+                "unrestricted standard key rejected by Gemini API "
+                "(policy enforced Jun 2026; migrate to auth key - "
+                "all standard keys rejected Sep 2026)"
+            ),
+            http_code=code,
+            endpoint=url,
+            data=parsed if isinstance(parsed, dict) else {},
         )
 
     if service.get("bytes") and code is not None and 200 <= code < 300:
